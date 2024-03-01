@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using EmpleadosAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmpleadosAPI.Data
@@ -11,5 +12,8 @@ namespace EmpleadosAPI.Data
         {
             base.OnModelCreating(builder);
         }
+
+        public DbSet<Empleado> Empleado { get; set; }
+
     }
 }

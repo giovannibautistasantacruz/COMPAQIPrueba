@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using EmpleadosAPI.Models;
+using EmpleadosAPI.Models.DTO;
 
 namespace EmpleadosAPI.Mapper
 {
@@ -6,7 +8,9 @@ namespace EmpleadosAPI.Mapper
     {
         public APIMappers() {
 
-            //CreateMap<t_Usuario, UsuarioDto>().ReverseMap();
+            CreateMap<Empleado, EmpleadoDTO>().ReverseMap();
+            CreateMap<EmpleadoDTO, Empleado>().ReverseMap();
+
         }
     }
 }

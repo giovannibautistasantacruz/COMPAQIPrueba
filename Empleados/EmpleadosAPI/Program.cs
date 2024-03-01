@@ -1,5 +1,7 @@
 using EmpleadosAPI.Data;
 using EmpleadosAPI.Mapper;
+using EmpleadosAPI.Repository;
+using EmpleadosAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(opciones =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 //Agregamos los Repositorios
-//builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IEmpleadoRepository, EmpleadoRepository>();
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secreta");
 
 
