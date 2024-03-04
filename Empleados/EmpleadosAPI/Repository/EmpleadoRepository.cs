@@ -4,6 +4,7 @@ using EmpleadosAPI.Models;
 using EmpleadosAPI.Models.DTO;
 using EmpleadosAPI.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EmpleadosAPI.Repository
 {
@@ -47,6 +48,18 @@ namespace EmpleadosAPI.Repository
             return _mapper.Map<List<EmpleadoDTO>>(empleados);
         }
 
+        public List<EmpleadoDTO> GetBusqueda(EmpleadoBusquedaDTO busqueda)
+        {
+            List<Empleado> empleadosBusqueda = new List<Empleado>();
+            if (busqueda != null)
+            {
+                empleadosBusqueda = _bd.Empleado.OrderBy(o => o.Nombre).Where(b => (string.IsNullOrEmpty(busqueda.Nombre )|| b.Nombre.Contains(busqueda.Nombre)) && (string.IsNullOrEmpty(busqueda.RFC) || b.RFC.Contains(busqueda.RFC)) && (busqueda.Status == null || b.IsActivo == busqueda.Status)).ToList();
+                return _mapper.Map<List<EmpleadoDTO>>(empleadosBusqueda);
+            }
+            empleadosBusqueda = _bd.Empleado.OrderBy(o => o.Nombre).ToList();
+
+            return _mapper.Map<List<EmpleadoDTO>>(empleadosBusqueda);
+        }
         public EmpleadoDTO EditarEmpleado(EmpleadoDTO empleado)
         {
             Empleado empleadoEdit = new Empleado();
@@ -66,5 +79,24 @@ namespace EmpleadosAPI.Repository
             return empleado;
         }
 
+        public EmpleadoDTO EliminarEmpleado(int idEmpleado)
+        {
+            Empleado empleadoEdit = new Empleado();
+            empleadoEdit = _bd.Empleado.AsNoTracking().OrderBy(o => o.Nombre).FirstOrDefault(e => e.IdEmpleado == idEmpleado);
+
+            if (empleadoEdit == null)
+            {
+                return new EmpleadoDTO();
+
+            }
+            empleadoEdit.FechaBaja = DateTime.Now;
+            empleadoEdit.IsActivo = false;
+            _bd.Update(empleadoEdit);
+            if (!Guardar())
+            {
+                return new EmpleadoDTO();
+            }
+            return _mapper.Map<EmpleadoDTO>(empleadoEdit);
+        }
     }
 }

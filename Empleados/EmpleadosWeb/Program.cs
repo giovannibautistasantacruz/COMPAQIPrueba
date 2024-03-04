@@ -1,9 +1,17 @@
+using EmpleadosWeb.Mapper;
+using EmpleadosWeb.Services;
+using EmpleadosWeb.Services.IServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+builder.Services.AddHttpClient<IEmpleadoService,EmpleadoService>();
+builder.Services.AddScoped<IEmpleadoService, EmpleadoService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

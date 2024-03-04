@@ -1,0 +1,80 @@
+﻿@model List<EmpleadosWeb.Models.DTO.EmpleadoDTO>
+@{
+    ViewData["Title"] = "Empleados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-4 border">
+    <form method="post" action="/Empleado/BusquedaEmpleado">
+        <div class="container border p-3">
+
+            <div class="row mt-2">
+                <div class="col-md-4">
+                    <label class="form-label">Nombre del Empleado</label>
+                    <input type ="text" id="nombre" name="nombre" class="form-control" />
+                  
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">RFC</label>
+                    <input type="text" id="rfc" name="rfc" class="form-control" />
+                 
+                </div>
+@*                 <div class="col-md-4">
+                    <label class="form-label">Apellido Materno del Empleado</label>
+                    <input type="text" asp-for="AMaterno" class="form-control" />
+
+                </div> *@
+            </div>
+
+
+            <div class="d-grid gap-2 d-md-block mt-2">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a asp-controller="Empleado" asp-action="Index" class="btn btn-danger">Actualizar</a>
+            </div>
+
+        </div>
+
+    </form>
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Empleados</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-controller="Empleado" asp-action="CrearEmpleado" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Crear Nuevo Empleado</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>E-mail</th>
+                <th>Puesto</th>
+                <th>RFC</th>
+                <th>Fecha Alta</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre @item.APaterno @item.AMaterno</td>
+                    <td>@item.Email</td>
+                    <td>@item.Puesto</td>
+                    <td>@item.RFC</td>
+                    <td>@item.FechaAlta</td>
+
+                    <td>
+                        <a asp-controller="Empleado" asp-action="ActualizarEmpleado" asp-route-empleadoId="@item.IdEmpleado" class="btn btn-success"><i class="bi bi-pencil-square"></i> </a>
+                        <a asp-controller="Empleado" asp-action="BajaEmpleado" asp-route-empleadoid="@item.IdEmpleado" class="btn btn-danger"><i class="bi bi-trash-fill"></i> </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+

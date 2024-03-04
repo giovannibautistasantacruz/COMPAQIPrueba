@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace EmpleadosAPI.Models.Response
+namespace EmpleadosWeb.Models.Response
 {
     public class RespuestaAPI
     {

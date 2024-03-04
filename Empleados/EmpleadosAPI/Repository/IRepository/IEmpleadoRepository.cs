@@ -8,5 +8,7 @@ namespace EmpleadosAPI.Repository.IRepository
         EmpleadoDTO GetById(int id);
         List<EmpleadoDTO> GetAll();
         EmpleadoDTO EditarEmpleado(EmpleadoDTO empleado);
+        List<EmpleadoDTO> GetBusqueda(EmpleadoBusquedaDTO busqueda);
+        EmpleadoDTO EliminarEmpleado(int idEmpleado);
     }
 }

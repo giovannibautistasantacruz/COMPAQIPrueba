@@ -97,5 +97,38 @@ namespace EmpleadosAPI.Controllers
             respuestaAPI.Result = empleado;
             return Ok(respuestaAPI);
         }
+
+        [HttpPost("BuscarEmpleado")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> BuscarEmpleado([FromBody] EmpleadoBusquedaDTO busquedaDTO)
+        {
+            
+            var empleados = _empleadoRepository.GetBusqueda(busquedaDTO);
+
+            return Ok(empleados);
+        }
+
+        [HttpPut("DeleteEmpleado/{idEmpleado}", Name = "DeleteEmpleado")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteEmpleado(int idEmpleado)
+        {
+            var empleado = _empleadoRepository.EliminarEmpleado(idEmpleado);
+            if (empleado == null)
+            {
+                respuestaAPI.StatusCode = HttpStatusCode.BadRequest;
+                respuestaAPI.IsSuccess = false;
+                respuestaAPI.ErrorMessages.Add("Ocurrio un error al eliminar alumno");
+                return BadRequest(respuestaAPI);
+            }
+
+            respuestaAPI.StatusCode = HttpStatusCode.OK;
+            respuestaAPI.IsSuccess = true;
+            respuestaAPI.Result = empleado;
+            return Ok(respuestaAPI);
+        }
     }
 }

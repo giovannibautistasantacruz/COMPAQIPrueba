@@ -1,0 +1,103 @@
+﻿@model EmpleadosWeb.Models.DTO.EmpleadoDTO
+
+@{
+    ViewData["Title"] = "EditarEmpleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="ActualizarEmpleado">
+    <div class="container border p-3">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input hidden asp-for="IdEmpleado"/>
+
+        <div class="row">
+            <h2 class="text-info">Editar Empleado</h2>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <label class="form-label">Nombre del Empleado</label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Apellido Paterno del Empleado</label>
+                <input asp-for="APaterno" class="form-control" />
+                <span asp-validation-for="APaterno" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Apellido Materno del Empleado</label>
+                <input asp-for="AMaterno" class="form-control" />
+                <span asp-validation-for="AMaterno" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <label class="form-label">Edad</label>
+                <input asp-for="Edad" class="form-control" />
+                <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Fecha de Nacimiento</label>
+                <input asp-for="FechaNacimiento" class="form-control" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Genero</label>
+                <input asp-for="Genero" class="form-control" />
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <label class="form-label">Estado Civil</label>
+                <input asp-for="EstadoCivil" class="form-control" />
+                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">RFC</label>
+                <input asp-for="RFC" class="form-control" />
+                <span asp-validation-for="RFC" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Dirección</label>
+                <textarea asp-for="Direccion" class="form-control"></textarea>
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <label class="form-label">E-mail</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Teléfono</label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Puesto</label>
+                <input asp-for="Puesto" class="form-control" />
+                <span asp-validation-for="Puesto" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-block mt-2">
+            <button type="submit" class="btn btn-primary">Editar</button>
+            <a asp-controller="Empleado" asp-action="Index" class="btn btn-danger">Cancelar</a>
+        </div>
+
+    </div>
+
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
